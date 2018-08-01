@@ -54,7 +54,7 @@ html{background:#252525;color:#fff}
 
             function test(ini) {
                 var i2=0
-                const repetition = 120000+ini
+                const repetition = 1200+ini
                 var D1 = performance.now();
                 for (var i = ini; i < repetition; i++) {
                     if (isPrime(i)) {
@@ -72,7 +72,7 @@ html{background:#252525;color:#fff}
                     html3.innerHTML = last
 
 
-                setTimeout(test,200,i)
+                setTimeout(test,100,i)
             }
             test(0)
 
