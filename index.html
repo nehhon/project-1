@@ -5,47 +5,43 @@
 <style>
 html{background:#252525;color:#fff}
 </style>
-    <link href='https://i.imgur.com/uAtWnKF.png' rel='shortcut icon'/>
+<link href='https://i.imgur.com/uAtWnKF.png' rel='shortcut icon'/>
 </head>
 <body>
-<code id="test"></code>
+<p id="test"></p>
+<p id="time"></p>
+<p id="last"></p>
     <script>
+        const workers = []
+        const len=8
+        workers.length = len
+        const html = document.getElementById("test")
+        const html2 = document.getElementById("time")
+        const html3 = document.getElementById("last")
+        const rep=120000
+        var num = 0
+        var time=0
+
+        var i2=0
+
+        for (var i = 0; i < len; i++) {
+            workers[i]= new Worker("worker.js");
+            workers[i].onmessage = function (event) {
+                const msg = event.data;
+                num += msg.arr
+                time+=msg.time
+                html.innerHTML = num
+                html2.innerHTML = (time / 60000).toFixed(2)
+                html3.innerHTML = msg.last
+                this.postMessage(i2)
+                i2+=rep
+            };
+            workers[i].postMessage(i2)
+            i2+=rep
+        }
 
 
-    var random;
-var randomSetup = function (rnd){
-    var m_w = 4294967295 - rnd;
-    var m_z = 4294967295 + rnd;
-    var i = 0
-    random = function () {
-        var mask = 4294967295;
-        m_z += i
-        m_w -= i++
-        m_z = (36969 * ((m_z) & 65535) + (m_z >> 16)) & mask;
-        m_w = (18000 * (m_w & 65535) + (m_w >> 16)) & mask;
-        var result = ((m_z << 16) + m_w) & mask;
-        result /= mask;
-        return result + 0.5;
 
-    }
-}
-    randomSetup()
-        var ttime = 0
-        var o=0
-function test(){
-    o++
-const repetition = 100000000
-var D1 = performance.now();
-for (var i = 0; i < repetition; i++)
-{
-  random()
-}
-    ttime += performance.now() - D1;
-    document.getElementById("test").innerHTML = ~~ttime + "ms" + " " + o * repetition
-    setTimeout(test,500)
-
-}
-        test()
 </script>
 </body>
 </html>
