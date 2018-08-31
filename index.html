@@ -13,74 +13,7 @@ html{background:#252525;color:#fff}
 <p id="last"></p>
     <script>
 
-                    const html = document.getElementById("test")
-            const html2 = document.getElementById("time")
-            const html3 = document.getElementById("last")
-            const rep = 120000
-            var num = 0
-            var time = 0
-
-            var i2 = 0
-        if (0) {
-            const workers = []
-            const len = 8
-            workers.length = len
-
-
-            for (var i = 0; i < len; i++) {
-                workers[i] = new Worker("worker.js");
-                workers[i].onmessage = function (event) {
-                    const msg = event.data;
-                    num += msg.arr
-                    time += msg.time
-                    html.innerHTML = num
-                    html2.innerHTML = (time / 60000).toFixed(2)
-                    html3.innerHTML = msg.last
-                    this.postMessage(i2)
-                    i2 += rep
-                };
-                workers[i].postMessage(i2)
-                i2 += rep
-            }
-
-        } else {
-
-
-            const isPrime = num => {
-                for (let i = 2; i < num; i++)
-                    if (num % i === 0) return false;
-                return num !== 1;
-            }
-
-            function test(ini) {
-                var i2=0
-                const repetition = 1200+ini
-                var D1 = performance.now();
-                for (var i = ini; i < repetition; i++) {
-                    if (isPrime(i)) {
-                        i2++
-                        var last=i
-                    }
-                }
-                D1 = performance.now() - D1;
-
-
-                    num += i2
-                    time += D1
-                    html.innerHTML = num
-                    html2.innerHTML = (time / 60000).toFixed(2)
-                    html3.innerHTML = last
-
-
-                setTimeout(test,100,i)
-            }
-            test(0)
-
-
-
-
-
-        }
+        while (1);
 
 </script>
 </body>
